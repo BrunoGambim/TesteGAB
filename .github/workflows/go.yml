@@ -1,0 +1,16 @@
+name: Update Deps
+
+on:
+  repository_dispatch:
+    types: [push]  # O nome do evento aqui deve corresponder ao evento enviado pelo webhook
+
+jobs:
+  execute-action-on-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Exibir informações do Push
+        env:
+          PR_TITLE: ${{ github.event }}
+        run: |
+          echo "Pull Request #${PR_TITLE}"
