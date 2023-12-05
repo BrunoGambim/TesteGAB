@@ -2,7 +2,6 @@ name: Update Deps
 
 on:
   repository_dispatch:
-    types: [push]  # O nome do evento aqui deve corresponder ao evento enviado pelo webhook
 
 jobs:
   execute-action-on-pr:
