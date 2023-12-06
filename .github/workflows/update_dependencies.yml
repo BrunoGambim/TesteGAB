@@ -1,7 +1,11 @@
 name: Update Deps
 
 on:
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      image:
+        required: true
+        type: string
 
 jobs:
   execute-action-on-pr:
