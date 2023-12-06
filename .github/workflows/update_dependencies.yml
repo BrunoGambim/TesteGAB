@@ -34,7 +34,7 @@ jobs:
         run: go mod tidy
 
       - name: Commit
-      - run: git add .
+        run: git add .
       - run: git config --global user.name "BrunoGambim"
       - run: git config --global user.name "brunor.gambim@gmail.com"
       - run: git commit -m "update deps"
