@@ -14,4 +14,4 @@ jobs:
     steps:
       - name: Exibir informações do Push
         run: |
-          echo "OK"
+          echo "${{ inputs.commit }}"
