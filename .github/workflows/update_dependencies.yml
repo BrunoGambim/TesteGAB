@@ -28,23 +28,8 @@ jobs:
 
       - name: Tidy
         run: go mod tidy
-
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          title: "Update package dependencies + tidy"
-          body: |
-            This is a change initiated automatically on a weekly basis by a
-            GitHub Action that updates the projects dependencies to their latest
-            minor and patch-level versions. This lets us stay up to date
-            incrementally so that updates are less effort to get merged compared
-            to large monolithic updates, and gets us security updates more
-            expediently.
-          branch: "dep-update"
-          commit-message: |
-            Update package dependencies + tidy
-          author: "Bot <bot@crunchydata.com>"
-          committer: "Bot <bot@crunchydata.com>"
-          delete-branch: true
-          reviewers: |
-            brandur
+        
+      - name: create pull request
+        run: gh pr create -B base_branch -H branch_to_merge --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
