@@ -25,7 +25,7 @@ jobs:
         with:
           token: ${{secrets.TOKEN}}
       - run: git log
-      - run: git checkout -b branch_to_merge dev
+      - run: git checkout -b bump/update-jarbas-commons dev
       
 
       - name: Update minor and patch-level dependencies
@@ -38,11 +38,11 @@ jobs:
         run: git add .
       - run: git config --global user.name "BrunoGambim"
       - run: git config --global user.name "brunor.gambim@gmail.com"
-      - run: git commit -m "update deps"
-      - run: git push origin branch_to_merge
+      - run: git commit -m "update jarbas-commons to ${{ secrets.TOKEN }}"
+      - run: git push origin bump/update-jarbas-commons
 
         
       - name: create pull request
-        run: gh pr create -B dev -H branch_to_merge --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+        run: gh pr create -B dev -H bump/update-jarbas-commons --title "bump:/ update jarbas-commons to ${{ secrets.TOKEN }}" --body ''
         env:
             GITHUB_TOKEN: ${{ secrets.TOKEN }}
