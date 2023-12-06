@@ -43,6 +43,6 @@ jobs:
 
         
       - name: create pull request
-        run: gh pr create -B dev -H bump/update-jarbas-commons --title "bump: update jarbas-commons to ${{ inputs.commit }}" --body ''
+        run: gh pr create -B dev -H bump/update-jarbas-commons --title "bump \u003a update jarbas-commons to ${{ inputs.commit }}" --body ''
         env:
             GITHUB_TOKEN: ${{ secrets.TOKEN }}
