@@ -22,9 +22,12 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{secrets.TOKEN}}
       - run: git log
       - run: git checkout -b branch_to_merge dev
       - run: git log
+      
 
       - name: Update minor and patch-level dependencies
         run: go get -t -u ./...
