@@ -23,6 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - run: git checkout -b branch_to_merge dev
+      - run: git log
 
       - name: Update minor and patch-level dependencies
         run: go get -t -u ./...
@@ -31,9 +32,11 @@ jobs:
         run: go mod tidy
 
       - name: Commit
+      - run: git status
         run: git add .
       - run: git config --global user.name "BrunoGambim"
       - run: git commit -m "update deps"
+      - run: git log
 
         
       - name: create pull request
