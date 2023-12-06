@@ -1,0 +1,48 @@
+env:
+  GO_VERSION: 1.21.4
+
+name: Update Dependencies
+on:
+  workflow_dispatch:
+    inputs:
+      commit:
+        required: true
+        type: string
+        
+jobs:
+  dep_update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{secrets.TOKEN}}
+      - run: git log
+      - run: git checkout -b bump/update-jarbas-commons dev
+      
+
+      - name: Update minor and patch-level dependencies
+        run: go get github.com/BrunoGambim/TesteGAA@${{ inputs.commit }}
+
+      - name: Tidy
+        run: go mod tidy
+
+      - name: Commit
+        run: git add .
+      - run: git config --global user.name "BrunoGambim"
+      - run: git config --global user.email "brunor.gambim@gmail.com"
+      - run: git commit -m "update jarbas-commons to ${{ inputs.commit }}"
+      - run: git push origin bump/update-jarbas-commons
+
+        
+      - name: create pull request
+        run: gh pr create -B dev -H bump/update-jarbas-commons --title "bump:update jarbas-commons to ${{ inputs.commit }}" --body ''
+        env:
+            GITHUB_TOKEN: ${{ secrets.TOKEN }}
