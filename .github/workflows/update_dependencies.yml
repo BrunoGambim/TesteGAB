@@ -1,9 +1,9 @@
 name: Update Deps
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
-      image:
+      commit:
         required: true
         type: string
 
