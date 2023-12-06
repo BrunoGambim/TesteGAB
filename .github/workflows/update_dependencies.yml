@@ -37,12 +37,12 @@ jobs:
       - name: Commit
         run: git add .
       - run: git config --global user.name "BrunoGambim"
-      - run: git config --global user.name "brunor.gambim@gmail.com"
-      - run: git commit -m "update jarbas-commons to ${{ secrets.TOKEN }}"
+      - run: git config --global user.email "brunor.gambim@gmail.com"
+      - run: git commit -m "update jarbas-commons to ${{ inputs.commit }}"
       - run: git push origin bump/update-jarbas-commons
 
         
       - name: create pull request
-        run: gh pr create -B dev -H bump/update-jarbas-commons --title "bump \u003a update jarbas-commons to ${{ secrets.TOKEN }}" --body ''
+        run: gh pr create -B dev -H bump/update-jarbas-commons --title "bump \u003a update jarbas-commons to ${{ inputs.commit }}" --body ''
         env:
             GITHUB_TOKEN: ${{ secrets.TOKEN }}
