@@ -22,7 +22,7 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v4
-      - run: git checkout -b branch_to_merge
+      - run: git checkout -b branch_to_merge dev
 
       - name: Update minor and patch-level dependencies
         run: go get -t -u ./...
