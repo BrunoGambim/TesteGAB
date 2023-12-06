@@ -21,19 +21,13 @@ jobs:
           go-version: ${{ env.GO_VERSION }}
 
       - name: Checkout
-      - run: git checkout -b branch_to_merge
+        run: git checkout -b branch_to_merge
 
       - name: Update minor and patch-level dependencies
         run: go get -t -u ./...
 
       - name: Tidy
         run: go mod tidy
-
-      - name: ADD
-      - run: git add .
-      
-      - name: Commit
-      - run: git commit -m "update dependencies"
         
       - name: create pull request
         run: gh pr create -B dev -H branch_to_merge --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
