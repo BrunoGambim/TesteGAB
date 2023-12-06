@@ -28,7 +28,7 @@ jobs:
       - run: git checkout -b bump/update-jarbas-commons dev
       
 
-      - name: Update minor and patch-level dependencies
+      - name: Update Jarbas-Commons
         run: go get github.com/BrunoGambim/TesteGAA@${{ inputs.commit }}
 
       - name: Tidy
