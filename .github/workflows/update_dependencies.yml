@@ -39,9 +39,10 @@ jobs:
       - run: git config --global user.name "brunor.gambim@gmail.com"
       - run: git commit -m "update deps"
       - run: git status
+      - run: git push origin branch_to_merge
 
         
       - name: create pull request
-        run: gh pr create -base dev -head branch_to_merge --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
+        run: gh pr create -B dev -H branch_to_merge --title 'Merge branch_to_merge into base_branch' --body 'Created by Github action'
         env:
             GITHUB_TOKEN: ${{ secrets.TOKEN }}
