@@ -1,7 +1,7 @@
 env:
   GO_VERSION: 1.21.4
 
-name: Update Dependencies
+name: Update and Push Jarbas Commons
 on:
   workflow_dispatch:
     inputs:
