@@ -1,17 +1,50 @@
-name: Update Deps
+env:
+  GO_VERSION: 1.18
 
+name: Update Dependencies
 on:
   workflow_dispatch:
     inputs:
       commit:
         required: true
         type: string
-
+        
 jobs:
-  execute-action-on-pr:
+  dep_update:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
-      - name: Exibir informações do Push
-        run: |
-          echo "${{ inputs.commit }}"
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Update minor and patch-level dependencies
+        run: go get -t -u ./...
+
+      - name: Tidy
+        run: go mod tidy
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          title: "Update package dependencies + tidy"
+          body: |
+            This is a change initiated automatically on a weekly basis by a
+            GitHub Action that updates the projects dependencies to their latest
+            minor and patch-level versions. This lets us stay up to date
+            incrementally so that updates are less effort to get merged compared
+            to large monolithic updates, and gets us security updates more
+            expediently.
+          branch: "dep-update"
+          commit-message: |
+            Update package dependencies + tidy
+          author: "Bot <bot@crunchydata.com>"
+          committer: "Bot <bot@crunchydata.com>"
+          delete-branch: true
+          reviewers: |
+            brandur
