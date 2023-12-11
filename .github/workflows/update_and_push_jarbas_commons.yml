@@ -15,11 +15,6 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - run: |
-          echo "id ${{ github.event.sender.id }}"
-          
-      - run: |
-          echo "login ${{ github.event.sender.login }}"
       - name: Install Go
         uses: actions/setup-go@v4
         with:
@@ -38,7 +33,7 @@ jobs:
 
       - name: Commit
         run: git add .
-      - run: git config --global user.name "BrunoGambim"
-      - run: git config --global user.email "brunor.gambim@gmail.com"
+      - run: git config --global user.name "${{ github.event.sender.login }}"
+      - run: git config --global user.email "${{ github.event.sender.id }}+${{ github.event.sender.login }}@users.noreply.github.com"
       - run: git commit -m "update jarbas-commons to ${{ inputs.commit }}"
       - run: git push origin bump/update-jarbas-commons
