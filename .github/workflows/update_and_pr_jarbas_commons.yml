@@ -36,7 +36,7 @@ jobs:
 
       - name: Commit
         run: git add .
-      - run: git config --global user.name "{{ github.event.sender.login }}"
+      - run: git config --global user.name "${{ github.event.sender.login }}"
       - run: git config --global user.email "${{ github.event.sender.id }}+${{ github.event.sender.login }}@users.noreply.github.com"
       - run: git commit -m "update jarbas-commons to ${{ inputs.commit }}"
       - run: git push origin bump/update-jarbas-commons
