@@ -33,6 +33,9 @@ jobs:
 
       - name: Tidy
         run: go mod tidy
+      
+      - name: Vendor
+        run: go mod vendor
 
       - name: Commit
         run: git add .
