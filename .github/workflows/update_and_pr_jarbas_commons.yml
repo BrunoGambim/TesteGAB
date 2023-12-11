@@ -16,7 +16,9 @@ jobs:
 
     steps:
       - run: |
-          echo "${{ github.actor }}"
+          echo "${{ github.event.sender.id }}"
+      - run: |
+          echo "${{ github.event.sender.login }}"
           
       - name: Install Go
         uses: actions/setup-go@v4
