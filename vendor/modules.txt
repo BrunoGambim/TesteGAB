@@ -1,0 +1,3 @@
+# github.com/BrunoGambim/TesteGAA v0.0.0-20231211195638-085cfca8e34d
+## explicit; go 1.21.4
+github.com/BrunoGambim/TesteGAA
